@@ -22,15 +22,18 @@
 
 import UIKit
     
-var imageViewLoadCached : ((imageView: UIImageView, imagePath : String, completion: (newImage: Bool) -> ()) -> ()) = {
-    (imageView: UIImageView, imagePath : String, completion: (newImage: Bool) -> ()) in
+var imageViewLoadCached : ((imageView: UIImageView, backgroundImageView: UIImageView, imagePath : String, completion: (newImage: Bool) -> ()) -> ()) = {
+    
+    (imageView: UIImageView, backgroundImageView: UIImageView, imagePath : String, completion: (newImage: Bool) -> ()) in
 
     imageView.image = UIImage(named:imagePath)
+    backgroundImageView.image = UIImage(named:imagePath)
     completion(newImage: imageView.image != nil)
 }
 
-var imageViewLoadFromPath: ((imageView: UIImageView, imagePath : String, completion: (newImage: Bool) -> ()) -> ()) = {
-    (imageView: UIImageView, imagePath : String, completion: (newImage: Bool) -> ()) in
+var imageViewLoadFromPath: ((imageView: UIImageView, backgroundImageView: UIImageView, imagePath : String, completion: (newImage: Bool) -> ()) -> ()) = {
+    
+    (imageView: UIImageView, backgroundImageView: UIImageView, imagePath : String, completion: (newImage: Bool) -> ()) in
     
     var url = NSURL(string: imagePath)
     imageView.sd_setImageWithURL(url, completed: {

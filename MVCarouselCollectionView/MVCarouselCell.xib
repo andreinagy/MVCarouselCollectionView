@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,27 +14,24 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSM-bD-wC3" customClass="MVCarouselCellScrollView" customModule="MVCarouselCollectionView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pey-Zt-VKe">
-                            <constraints>
-                                <constraint firstAttribute="height" id="Uyb-Bs-mDb"/>
-                                <constraint firstAttribute="width" id="azf-WB-O7i"/>
-                            </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="Uyb-Bs-mDb"/>
-                                    <exclude reference="azf-WB-O7i"/>
-                                </mask>
-                            </variation>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dAr-Un-JV1" userLabel="Blur Image View">
+                            <rect key="frame" x="0.0" y="-7" width="600" height="607"/>
                         </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pey-Zt-VKe"/>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="dAr-Un-JV1" secondAttribute="trailing" id="1Rv-lM-lmw"/>
+                        <constraint firstItem="dAr-Un-JV1" firstAttribute="top" secondItem="bSM-bD-wC3" secondAttribute="top" id="7OJ-OI-BIR"/>
                         <constraint firstAttribute="bottom" secondItem="Pey-Zt-VKe" secondAttribute="bottom" id="LPd-LF-t6b"/>
+                        <constraint firstItem="dAr-Un-JV1" firstAttribute="leading" secondItem="bSM-bD-wC3" secondAttribute="leading" id="hoP-kx-9ay"/>
+                        <constraint firstAttribute="bottom" secondItem="dAr-Un-JV1" secondAttribute="bottom" id="jZ3-Ug-Rgt"/>
                         <constraint firstAttribute="trailing" secondItem="Pey-Zt-VKe" secondAttribute="trailing" id="lem-qo-oGC"/>
                         <constraint firstItem="Pey-Zt-VKe" firstAttribute="leading" secondItem="bSM-bD-wC3" secondAttribute="leading" id="oLf-jy-Y3M"/>
                         <constraint firstItem="Pey-Zt-VKe" firstAttribute="top" secondItem="bSM-bD-wC3" secondAttribute="top" id="qcI-xQ-iYt"/>
                     </constraints>
                     <connections>
                         <outlet property="imageView" destination="Pey-Zt-VKe" id="peH-Md-aPV"/>
+                        <outlet property="imageViewBackground" destination="dAr-Un-JV1" id="igh-us-ueT"/>
                     </connections>
                 </scrollView>
             </subviews>

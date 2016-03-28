@@ -23,7 +23,7 @@
 import UIKit
 
 // Image loader closure type
-public typealias MVImageLoaderClosure = ((imageView: UIImageView, imagePath : String, completion: (newImage: Bool) -> ()) -> ())
+public typealias MVImageLoaderClosure = ((imageView: UIImageView, backgroundImageView: UIImageView, imagePath : String, completion: (newImage: Bool) -> ()) -> ())
 
 class MVCarouselCellScrollView: UIScrollView, UIScrollViewDelegate {
 
@@ -34,7 +34,7 @@ class MVCarouselCellScrollView: UIScrollView, UIScrollViewDelegate {
     var imagePath : String = "" {
         didSet {
             assert(self.imageLoader != nil, "Image loader must be specified")
-            self.imageLoader?(imageView : self.imageView, imagePath: imagePath, completion: {
+            self.imageLoader?(imageView : self.imageView, backgroundImageView: self.imageViewBackground, imagePath: imagePath, completion: {
                 (newImage) in
                 self.resetZoom()
             })
@@ -43,14 +43,27 @@ class MVCarouselCellScrollView: UIScrollView, UIScrollViewDelegate {
     var imageLoader: MVImageLoaderClosure?
     
     @IBOutlet weak private var imageView : UIImageView!
+    @IBOutlet weak private var imageViewBackground : UIImageView!
+    private var blurView : UIVisualEffectView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.delegate = self
-        self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        self.imageView.contentMode = .ScaleAspectFit
+        self.imageViewBackground.layer.masksToBounds = true
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        self.imageViewBackground.frame = self.bounds
+        let blurEffect = UIBlurEffect(style: .Light)
+        self.blurView = UIVisualEffectView(effect: blurEffect)
+        self.blurView.frame = self.bounds
+        self.insertSubview(blurView, aboveSubview: self.imageViewBackground)
+    }
+    
     func resetZoom() {
         if self.imageView.image == nil {
             return
@@ -85,7 +98,6 @@ class MVCarouselCellScrollView: UIScrollView, UIScrollViewDelegate {
         let horzContentInset = cellAspectRatioWiderThanImage ? 0.5 * (cellSize.width - adjustedContentWidth) : 0.0
         let adjustedContentHeight = cellSize.width / imageAspectRatio
         let vertContentInset = !cellAspectRatioWiderThanImage ? 0.5 * (cellSize.height - adjustedContentHeight) : 0.0
-    
         self.contentInset = UIEdgeInsetsMake(vertContentInset, horzContentInset, vertContentInset, horzContentInset)
     }
     

@@ -26,7 +26,7 @@ import MVCarouselCollectionView
 class MVEmbeddedCarouselViewController: UIViewController, MVCarouselCollectionViewDelegate, MVFullScreenCarouselViewControllerDelegate {
 
     var imagePaths : [String] = []
-    var imageLoader: ((imageView: UIImageView, imagePath : String, completion: (newImage: Bool) -> ()) -> ())?
+    var imageLoader: MVImageLoaderClosure?
 
     @IBOutlet var collectionView : MVCarouselCollectionView!
     @IBOutlet var pageControl : MVCarouselPageControl!

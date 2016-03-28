@@ -34,7 +34,7 @@ class MVFullScreenCarouselViewController: UIViewController, MVCarouselCollection
     weak var delegate : MVFullScreenCarouselViewControllerDelegate?
 
     var imagePaths : [String] = []
-    var imageLoader: ((imageView: UIImageView, imagePath : String, completion: (newImage: Bool) -> ()) -> ())?
+    var imageLoader: MVImageLoaderClosure?
 
     @IBOutlet var collectionView : MVCarouselCollectionView!;
     
@@ -54,7 +54,7 @@ class MVFullScreenCarouselViewController: UIViewController, MVCarouselCollection
     
         //self.collectionView.reloadData()
         // Apparently on iOS 7 scrollToInitialIndex doesn't have an effect here. Using performSelector fixes it
-        _ = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: Selector("scrollToInitialIndex"), userInfo: nil, repeats: false)
+        _ = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: #selector(MVFullScreenCarouselViewController.scrollToInitialIndex), userInfo: nil, repeats: false)
     }
     
     func scrollToInitialIndex() {
